@@ -83,12 +83,14 @@
 \newtheorem{df}{Definição}
 \newtheorem{af}{Afirmação}
 \newtheorem{ex}{Exemplo}
+\newtheorem{prop}{Proposição}
 
-\theoremstyle{remark}
+\newtheorem{definition}{Definição}
+\let\olddefinition\definition
+\renewcommand{\df}{\olddefinition\normalfont}
 
-
-
-%\theoremstyle{definition}
+%\theoremstyle{remark}
+\theoremstyle{definition}
 
 
 \begin{document}
@@ -96,41 +98,42 @@
 
 \subsection{Notação}
 $\begin{array}{ll}
-Der(L) & a \mbox{ álgebra das derivações de }  L \\ K \rtimes_\vartheta L & \mbox{ soma semidireta das álgebras de Lie $K$ e $L$ induzida por } \vartheta.\\ 
- & \mbox{ Omitiremos $\vartheta$ se ela for nula} \\
-U \oplus V & \mbox{ Soma direta de espaços vetoriais} 
+Der(L) & a \mbox{ álgebra das derivações de }  L \\
+U \oplus V & \mbox{ Soma direta de espaços vetoriais ou de álgebras de Lie} 
  \end{array}$
 
 \subsection{Pares compatíveis}
 
 Sejam $K$ e $I$ álgebras de Lie. Diremos que $K$ age sobre $I$ se existe um homomorfismo de álgebras de Lie $\psi:K \to Der(I)$. Neste caso, denotaremos a ação de $K$ sobre $I$ por $$[a,k]:=\psi(k)(a), k \in K,a \in I.$$
 
-\begin{df}{\label{comp}}Sejam $K$ e $I$ álgebras de Lie tal que $K$ age sobre $I$. Defina a álgebra dos pares compatíveis de $Der(K) \rtimes Der(I)$ por
- $$\begin{array}{lll}
+\begin{df}{\label{comp}} Sejam $K$ e $I$ álgebras de Lie tal que $K$ age sobre $I$. Um elemento $d_K+d_I \in Der(K)$ é dito par compatível se $d_I([a,k])=[d_I(a),k]+[a,d_K(k)]$ para todo $a \in I$ e $k \in K$.\end{df}
 
-Comp(K,I) & = & \{d_K+d_I \in Der(K) \rtimes Der(I) \mbox{ tal que } d_I([a,k])=[d_I(a),k]+[a,d_K(k)], \\
+\begin{prop} Sejam $K$ e $I$ álgebras de Lie tal que $K$ age sobre $I$. O conjunto 
+$$\begin{array}{lcl}
+Comp(K,I) & = & \{d_K+d_I \in Der(K) \oplus Der(I) \mid d_I([a,k])=[d_I(a),k]+[a,d_K(k)], \\
 && \mbox{ para todo } a \in I,k \in K \}.
-\end{array}$$
-\end{df}
+\end{array}$$ dos pares compatíveis é uma subálgebra de $Der(K) \oplus Der(I)$
+\end{prop}
 
-Para verificar que $Comp(K,I)$ é uma subálgebra de $Der(K)\rtimes Der(I)$ considere $d_K+d_I,e_K+e_I \in Comp(K,I)$, $a \in I$ e $k \in K$. Então,
+\prova Sejam $d_K+d_I,e_K+e_I \in Comp(K,I)$, $a \in I$ e $k \in K$. Como o produto em $L$ é linear é imediato verificar que $Comp(K,I)$ é um subespaço de $Der(K)\oplus Der(I)$. Além disso,
 $$\begin{array}{rcl}
-[d_I,e_I][a,k] & = & (d_I.e_I - e_I.d_I)[a,k] \\
+[d_I,e_I][a,k] & = & (d_I e_I - e_Id_I)[a,k] \\
                & = & d_I([e_I(a),k]+[a,e_K(k)])- e_I([d_I(a),k]+[a,d_K(k)]) \\
-               & = & [d_I.e_I(a),k]+ [e_I(a),d_K(a)]+ [d_I(a),e_K(k)]+[a,d_K.e_K(k)] \\
-               & - &[e_I.d_I(a),k]-[d_I(a),e_K(k)]-[e_I(a),d_K(k)]-[a,e_K.d_K(k)] \\ 
+               & = & [d_Ie_I(a),k]+ [e_I(a),d_K(a)]+ [d_I(a),e_K(k)]+[a,d_K.e_K(k)] \\
+               & - &[e_Id_I(a),k]-[d_I(a),e_K(k)]-[e_I(a),d_K(k)]-[a,e_K.d_K(k)] \\ 
                & = &[[d_I,e_I](a),k]-[a,[d_K,e_K](k)]. \\ 
                
-\end{array} $$
+               
+\end{array} $$ Segue que $[d_K+d)i,e_K+e_I] \in Comp(K,I)$ e, portanto, $Comp(K,I)$ é uma subálgebra de $Der(K) \oplus Der(I)$.\begin{flushright}
+ \cqd
+\end{flushright}
 
-
-
-Se $I$ é abeliana podemos calcular os pares compatíveis como um anulador de uma ação de $Der(K) \rtimes Der(I)$ sobre $Hom(K,Der(I))$.  Para isso, sejam $d_K+d_I \in Der(K) \rtimes Der(I)$, $T \in Hom(K,Der(I))$, $k \in K$, $a \in I$ e defina a aplicação $\psi_I:\mathfrak{gl}(K) \rtimes \mathfrak{gl}(I) \to \mathfrak{gl}(Hom(K,Der(I)))$ por
+Se $I$ é abeliana podemos calcular os pares compatíveis como um anulador de uma ação de $Der(K) \oplus Der(I)$ sobre $Hom(K,Der(I))$.  Para isso, sejam $d_K+d_I \in Der(K) \oplus Der(I)$, $T \in Hom(K,Der(I))$, $k \in K$ e defina a aplicação $\psi_I:\mathfrak{gl}(K) \oplus \mathfrak{gl}(I) \to \mathfrak{gl}(Hom(K,Der(I)))$ por
  \begin{equation}{\label{acaocomp}}
- (d_K+d_I)T(k)(a)=d_I(T(k)(a))-T(d_K(k))(a)-T(k)(d_I(a)).
+ \psi_I(d_K+d_I)T(k)=d_I(T(k))-T(d_K(k))-T(k)(d_I).
  \end{equation}
-   
- Primeiro Observe que essa aplicação está bem definida, ou seja, que $\psi_I(d_K+d_I)(T) \in Hom(K,Der(I))$ pois $I$ é abeliana.
+ 
+ A aplicação $\Psi_I(d_K+d_I)$ é linear pois é uma combinação linear de composições de aplicações lineares. Isso também é suficiente para garantir que ela pertence a $Hom(K,Der(I))$ pois $I$ é abeliana.
  
 % Sejam $k \in K$ e $a,b \in I$. Então,   
 %  $$\begin{array}{rcl}
@@ -147,61 +150,64 @@ Se $I$ é abeliana podemos calcular os pares compatíveis como um anulador de uma 
 %\end{array} $$
 
 
-Vamos verificar que $\psi_I$ é homomorfismo de álgebras de Lie. Seja $e_K+e_I  \in \mathfrak{gl}(K) \rtimes \mathfrak{gl}(I) $ então
+Para verificar que $\psi_I$ é homomorfismo de álgebras de Lie considere $e_K+e_I  \in \mathfrak{gl}(K) \oplus \mathfrak{gl}(I) $, então
  
   
 $$\begin{array}{rcl}
-[\psi_I(d_K+d_I),\psi_I(e_K+e_I)]T(k)(a) & = &(\psi_I(d_K+d_I).\psi_I(e_K+e_I)-\psi_I(e_K+e_I).\psi_I(d_K+d_I))T(k)(a)\\
-               & = &\psi_I(d_K+d_I)(e_I(T(k)(a))-T(e_K(k))(a)-T(k)(e_I(a)) \\
-               & - & \psi_I(e_K+e_I)(d_I(T(k)(a))-T(d_K(k))(a)-T(k)(d_I(a))\\
-               & = & d_I.e_I(T(k)(a))-d_I(T(e_K(k))(a))-d_I(T(k)(e_I(a)))\\
-               & - & e_I.d_I(T(k)(a))+e_I(T(d_K(k))(a))+e_I(T(k)(d_I(a)))\\
-               & - & e_I(T(d_K(k))(a))+T(e_K.d_K(k))(a)+T(d_K(k))(e_I(a))\\
-               & + & d_I(T(e_K(k))(a))-T(d_K.e_K(k))(a)-T(e_K(k))(d_I(a))\\
-               & - & e_I(T(k)(d_I(a)))+T(e_K(k))(d_I(a))+T(k)(e_I.d_I(a))\\
-               & + & d_I(T(k)(e_I(a)))-T(d_K(k))(e_I(a))-T(k,d_I.e_I(a))\\
-               & = & [d_I,e_I](T(k)(a))-T([d_K,e_K])(k)(a)-T(k)([d_I,e_I](a)) \\
-               & = & \psi_I([d_K,e_K]+[d_I,e_I])T(k)(a)\\  
-               & = & \psi_I([d_K+d_I,e_K+e_I])T(k)(a).
+[\psi_I(d_K+d_I),\psi_I(e_K+e_I)]T(k) & = &(\psi_I(d_K+d_I)\psi_I(e_K+e_I)-\psi_I(e_K+e_I)\psi_I(d_K+d_I))T(k)\\
+               & = &\psi_I(d_K+d_I)(e_I(T(k))-T(e_K(k))-T(k)(e_I) \\
+               & - & \psi_I(e_K+e_I)(d_I(T(k))-T(d_K(k))-T(k)(d_I)\\
+               & = & d_I.e_I(T(k))-d_I(T(e_K(k)))-d_I(T(k)(e_I))\\
+               & - & e_I.d_I(T(k))+e_I(T(d_K(k)))+e_I(T(k)(d_I))\\
+               & - & e_I(T(d_K(k)))+T(e_Kd_K(k))+T(d_K(k))(e_I)\\
+               & + & d_I(T(e_K(k)))-T(d_Ke_K(k))-T(e_K(k))(d_I)\\
+               & - & e_I(T(k)(d_I))+T(e_K(k))(d_I)+T(k)(e_Id_I)\\
+               & + & d_I(T(k)(e_I))-T(d_K(k))(e_I)-T(k)(d_Ie_I)\\
+               & = & [d_I,e_I](T(k))-T([d_K,e_K])(k)-T(k)([d_I,e_I]) \\
+               & = & \psi_I([d_K,e_K]+[d_I,e_I])T(k)\\  
+               & = & \psi_I([d_K+d_I,e_K+e_I])T(k).
 \end{array} $$
 
-\begin{teo} Sejam $K$ e $I$ álgebras de Lie  tais que $K$ age sobre $I$ e $I$ é abeliana. Considere em $Hom(K,Der(I))$ a ação de $Der(K) \rtimes Der(I)$ dada por $\psi_I$ definida em ({\ref{acaocomp}}). Se $\psi \in Hom(K,Der(I))$ é dada por $\psi(k)(a)=[a,k]$ então $Comp(K,I)=Ann_{Der(K)\rtimes Der(I)}(\psi)$.
-\end{teo}\prova
-
- $\begin{array}{rcl}
-d_K+d_I \in Comp(K,I) & \Leftrightarrow & d_I[a,k]=[d_I(a),k]+[a,d_K(k)] \hspace{0,5cm} a\in I, k \in K \\
-               & \Leftrightarrow & d_I[a,k]-[d_I(a),k]-[a,d_K(k)]=0 \hspace{0,5cm} a\in I, k \in K  \\
-               & \Leftrightarrow  & \psi_I(d_K+d_I)(\psi)=0 \\
-               & \Leftrightarrow  & d_K+d_I \in Ann_{Der(K)\rtimes Der(I)}(\psi) 
-\end{array} $\begin{flushright}
+\begin{teo} Sejam $K$ e $I$ álgebras de Lie  tais que $K$ age sobre $I$ e $I$ é abeliana. Considere a restrição de $\psi_I$ definida em ({\ref{acaocomp}}) para $Der(K) \oplus Der(I)$. Se $T \in Hom(K,Der(I))$ é dada por $T(k)(a)=[a,k]$ então $Comp(K,I)=Ann_{Der(K)\oplus Der(I)}(T)$.
+\end{teo}\prova Sejam $ a\in I$ e $k \in K$ quaisquer. Se $d_K+d_I \in Comp(K,I) \subset Der(K)\oplus Der(I) $ então $d_I[a,k]=[d_I(a),k]+[a,d_K(k)]$. Essa igualdade é equivalente à $\psi_I|_{Der(K)\oplus Der(I)}(d_K+d_I)(T)=0$, que é a definição de $Ann_{Der(K)\oplus Der(I)}(T)$.  
+\begin{flushright}
 \cqd
 \end{flushright}
-
 
 \subsection{Definição de $\phi$}
 
-
-Sejam $L$ uma álgebra de Lie e $I$ um ideal de $L$ invariante por $Der(L)$. Seja $K=L/I$ e denote por $\bar{k}=k+I$, $k \in L$. Escreva $L=K \oplus I$, então:
+Sejam $L$ uma álgebra de Lie e $I$ um ideal de $L$. Defina por $A=\{f \in \mathfrak{gl}(L) \mid f(I) \subset I\}$ a subálgebra de $\mathfrak{gl}(L)$ das aplicações que mantém $I$ invariante. Seja $K=L/I$ e denote por $\bar{k}=k+I$, $k \in L$. Se $f \in A$ então:
 \begin{itemize}
-\item para cada $k \in K$ a aplicação $d_K:K \to K $  dada por $d_K(\bar{k})=d(k)+I $ é uma derivação de $K$;
-\item a restrição de $d$ ao ideal $I$ é um elemento de $Der(I)$. 
+\item a aplicação $f_K:K \to K $  dada por $f_K(\bar{k})=f(k)+I,k \in L$, é um elemento bem definido de $\mathfrak{gl}(K)$;
+\item a restrição de $f_I:I \to I$ de $f$ ao ideal $I$   é um elemento de $\mathfrak{gl}(I)$. 
 \end{itemize}
-Logo, podemos definir o homormorfismo entre álgebras de Lie $\phi:Der(L) \to Der(K) \rtimes Der(I)$ por
- \begin{equation}
-\phi(d)=d_K+d_I.
+Logo, podemos a aplicação $\Phi:A \to \mathfrak{gl}(K) \oplus\mathfrak{gl}(I)$ por
+ \begin{equation}{\label{defphi}}
+\Phi(f)=f_K+f_I.
 \end{equation}
 
-
-\begin{obs}{\label{acaoK}} Sejam $L$ uma álgebra de Lie e $I$ ideal de $L$ com $K=L/I$. Defina a aplicação $\psi:K \to Der(I)$ por $\bar{\psi}(\bar{k})(a)=[a,k],a \in I$ e $k \in L$ tal que $\bar{k}=k+I$. Então $I$ abeliano se, e somente se, $\bar{\psi}$ está bem definida.\end{obs}
-\prova  Suponha que $I$ é abeliano. Defina a aplicação $L \to Der(I)$ por $\psi(k)(a)=[k,a]$. Como  $I$ é uma subálgebra de $ker(\psi)$ então podemos induzir uma representação $\bar{\psi}:K \to Der(I)$ dada por $\bar{\psi}(\bar{k})=\psi(k)(a)=[a,k], \bar{k} \in K, a \in I$. 
- 
- Por outro lado, se $\bar{\psi}$ está bem definida então $[a,k+b]=[a,k]$ para $a,b \in I$ e $k \in L$. Em particular, para $k=0$ temos $[a,b]=0$. \begin{flushright}
+\begin{prop}{\label{boadefphi}}Sejam $K$ uma álgebra de Lie e $I$ um ideal de $L$. Suponha que $K=L/I$ e $A=\{f \in \mathfrak{gl}(L) \mid f(I) \subset I\}$. Então a aplicação de  $\Phi$ definida em ({\ref{defphi}}) é um homomorfismo de álgebras de Lie.
+\end{prop}
+\prova Seja $f,g \in A$. Então $$\begin{array}{rcl}
+[\Phi([f,g]) & = & \Phi(fg-gf)\\
+               & = &(fg)_K+(fg)_I-(gf)_K-(gf)_I \\
+               & = & f_Kg_K+f_Ig_I-g_Kf_K-g_If_I\\
+               & = & [f_K,g_K]+[f_I,g_I]\\
+               & = & [f_K+f_I,g_K+g_I]\\
+               & = & [\Phi(f),\Phi(g)].\\
+\end{array} $$\begin{flushright}
 \cqd
 \end{flushright}
 
-Se $L$ é uma álgebra de Lie e $I$ um ideal de $L$ com $K=L/I$ definiremos a ação de $K$ sobre $I$ usando a observação {\ref{acaoK}}. Ou seja, diremos que $K$ age sobre $I$ se $I$ é um ideal abeliano de $L$ e a ação é dada pela representação $[a,k]=\bar{\psi}(k)(a),k \in K$.  
+\begin{prop}{\label{defphi2}}  Sejam $K$ uma álgebra de Lie e $I$ um ideal de $L$ invarinate por $Der(L)$. Suponha que $K=L/I$ e $\Phi$ é a apicação definida ({\ref{defphi}}). Defina $\phi=\Phi|_{Der(L)}$ a restrição de $\Phi$ a $Der(L)$. Então $\phi:Der(L)\to Der(K) \oplus Der(I)$ é um homomorfismo de álgebras de Lie.
+\end{prop}
+\prova Devido ao resultado obtido na proposição {\ref{boadefphi}}, basta provarmos que se $d \in Der(L)$ então $d_K+d_I \in Der(K) \oplus  Der(I)$. Sejam $k,h \in L$ então $d_K([\bar{k},\bar{h}])=d([k,h])+I=[d(k),h]+[k,d(h)]+I=[d_K(\bar{k}),\bar{h}]+[\bar{k},d_K(\bar{h})]$. Se $a,b \in I$ então $d_I([a,b])=d([a,b])=[d(a),b]+[a,d(b)]=[d_I(a),b]+[a,d_I(b)]$. \begin{flushright}
+\cqd
+\end{flushright}
 
-\begin{teo} Sejam $L$ uma álgebra de Lie e $I$ um ideal de $L$ tais que $K=L/I$ age sobre $I$ então $Im(\phi)\leq Comp(K,I).$
+Seja $L$ uma álgebra de Lie e $I$ ideal de $L$. A representação adjunta de  $L$ é definida por $ad_L:L \to Der(L)$ tal que $ad_L(x)(y)=[y,x]$. Suponha $I$ é um ideal abeliano e defina $K=L/I$. Então podemos induzir uma representação $ad_K:K \to Der(I)$ por $ad_K(\bar{k})(a)=[a,k]$, para todo $k \in L$ e $a \in I$. Assim, se $I$ é abeliano então $K$ age sobre $I$.
+
+\begin{teo} Sejam $L$ uma álgebra de Lie e $I$ um ideal abeliano de $L$. Suponha que $K$ age sobre $I$ pela representação $ad_K:K \to Der(I)$. Seja $\phi: Der(L) \to Der(K)\oplus Der(I)$ dada por $\phi(d)=d_K+d_I$, conforme definida na proposição {\ref{defphi2}}. Então $Im(\phi)\leq Comp(K,I).$
 \end{teo}
 \prova Se $d_K+d_I \in Im(\phi)$ então existe $d \in D$ tal que $\phi(d)=d_K+d_I$. Seja $k \in L$ tal que $k+I=\bar{k}$ e $a \in I$, $d_I[a,\bar{k}]= d_I[a,k]=d[a,k]=[d(a),k]+[a,d(k)]=[d_I(a),\bar{k}]+[a,d_K(\bar{k})].$
 \begin{flushright}
@@ -210,7 +216,7 @@ Se $L$ é uma álgebra de Lie e $I$ um ideal de $L$ com $K=L/I$ definiremos a ação
 
 \subsection{Extensões usando cohomologia}
 
-\begin{df} Sejam $K$ e $I$ álgebras de Lie tal que $K$ age sobre $I$. Defina
+\begin{df} Sejam $K$ e $I$ álgebras de Lie com $I$ abeliana tal que $K$ age sobre $I$. Defina
 
 $$\begin{array}{rcl}
 
@@ -229,7 +235,7 @@ Se $K$ age sobre $I$, podemos definir uma extensão de $K$ usando elementos de $Z
 
 $L_\theta$ é bem definida em $H^2(K,I)$. Sejam $\theta \in Z^2(K,I)$ e $\eta \in B^2(K,I)$ tal que $\eta(k,h)= \nu([h,k])+[\nu(h),k]-[\nu(k),h]$. Cada elemento de $L_\theta$ pode ser escrito unicamente como $k+a, k \in K, a\in I$. Então $\sigma:L_\theta \to L_{\theta + \eta}$ por $\sigma(x+a)=x+(\nu(x)+a)$ é um isomorfismo entre as álgebras de Lie. 
 
-\begin{af} Sejam $L$ uma álgebra de Lie e $I$ um ideal tais que $K$ age sobre $I$. Então existe $\theta \in Z^2(K,I)$ tal que $L \cong L_\theta$. 
+\begin{af} Sejam $L$ uma álgebra de Lie e $I$ um ideal tais que $K=L/I$ age sobre $I$. Então existe $\theta \in Z^2(K,I)$ tal que $L \cong L_\theta$. 
 \end{af}
 \prova Considere a seguinte sequência exata
   $$0 \to I\stackrel{i}{\to} L \stackrel{\pi}{\to} H \to 0,$$
@@ -251,16 +257,49 @@ $L_\theta$ é bem definida em $H^2(K,I)$. Sejam $\theta \in Z^2(K,I)$ e $\eta \in
  \cqd
  \end{flushright}
 
+\begin{af} Sejam $L$ uma álgebra de Lie e $I$ um ideal tais que $K=L/I$ age sobre $I$. Sejam $\theta, \eta \in H^2(K,I)$ e $\{e_1,\cdots, e_s\}$ base de $I$. Escreva $\theta(x,y)=\sum_{i=1}^s\theta_i(x,y).e_i$ e $\eta(x,y)=\sum_{i=1}^s\eta_i(x,y).e_i$. Suponha que os \textcolor{red}{isomorfismos lineares} $\sigma:L_\theta \to L_\eta$ fixem $I$. Então $L_\theta \cong L_\eta$ se e somente se existe $\delta \in Aut(K)$ tal que $\delta.\eta_i$ e $\theta_i$ geram o mesmo subespaço de $H^2(K,\F)$.
+\end{af}
+\prova Seja $\sigma:L_\theta \to L_\eta$ um isomorfismo de álgebras de Lie. Como espaço vetorial escreva $L_\theta=K\oplus I=L_\eta$. Seja $\{x_1,\cdots,x_n\}$ uma base de $K$.
 
+\textcolor{red}{Análogo aos caso das derivações, dado um automorfismo $\sigma:L_\theta \to L_\eta$ podemos escrever $\sigma(k+a)=\sigma_K(k)+\varphi_\sigma(k)+\sigma_I(a)$, com $\sigma_K \in Aut(K)$, $\varphi \in Hom(K,I)$ e $\sigma_I \in Aut(I).$}
+
+ \textcolor{red}{- $\delta.\theta$ é a ação de $Aut(K)$ em $Z^2(K,I)$.}
+
+
+
+Desenvolvendo a equação
+ $$[\sigma(x_i+e_r),\sigma(x_j+e_s)]=\sigma([x_i+e_r,x_j+e_s]), 1 \leq i,j,\leq n1 \leq r,t \leq s,$$ obtemos:
+ 
+ $$\begin{array}{rcl}
+ [\sigma(x_i+e_r),\sigma(x_j+e_s)]& = &[\sigma_K(x_i)+\varphi_\sigma(x_i)+\sigma_I(e_r),\sigma_K(x_j)+\varphi_\sigma(x_j)+\sigma_I(e_t)] \\
+ & = &  [\sigma_K(x_i),\sigma_K(x_j)]_K+\eta(\sigma_K(x_i),\sigma_K(x_j))\\
+ & + &  [\varphi_\sigma(x_i)+\sigma_I(e_r),\sigma_K(x_j)]-[\varphi_\sigma(x_j)+\sigma_I(e_t),\sigma_K(x_i)]\\
+  & = & [\sigma_K(x_i),\sigma_K(x_j)]_K+\eta(\sigma_K(x_i),\sigma_K(x_j))\\
+  & + & [\varphi_\sigma(x_i),\sigma_K(x_j)]-[\varphi_\sigma(x_j),\sigma_K(x_i)]+ [\sigma_I(e_r),\sigma_K(x_j)]-[\sigma_I(e_t),\sigma_K(x_i)] \\
+ \end{array}$$
+
+ $$\begin{array}{rcl}
+ \sigma([x_i+e_r,x_j+e_s]) & = &\sigma([x_i,x_j]_K+\theta(x_i,x_j)+[e_r,x_j]-[e_s,x_t]) \\
+ & = &  \sigma_K([x_i,x_j]_K)+\varphi_\sigma([x_i,x_j])+\sigma(\theta(x_i,x_j))\\
+ & + &  \sigma_I([e_r,x_j])-\sigma_I([e_t,x_i]) \mbox{ \textcolor{red}{pares compatíveis de automorfismos!!!}}\\
+  & = &  \sigma_K([x_i,x_j]_K)+\varphi_\sigma([x_i,x_j])+\sigma(\theta(x_i,x_j))\\
+ & + & [\sigma_I(e_r),\sigma_K(x_j)]-[\sigma_I(e_t),\sigma_K(x_i)]\\
+ \end{array}$$
+ 
+ Segue que $$\eta(\sigma_K(x_i),\sigma_K(x_j))=\sigma(\theta(x_i,x_j))+\varphi_\sigma([x_i,x_j])+[\varphi_\sigma(x_i),\sigma_K(x_j)]-[\varphi_\sigma(x_j),\sigma_K(x_i)].$$
+ 
+ Se $\sigma(e_k)=\sum_{m=1}^s \alpha_{km}.e_k$ então $\eta_p(\sigma_K(x_i),\sigma_K(x_j))=\sum_{k=1}^s \alpha_{kp}\theta_k(x_i,x_j)+B^2(K,I)$, para $i \leq p \leq s$.
+ 
+ Suponha que $\delta \eta_i$ e $\theta_i$ geram o mesmo espaço em $Z^2(K,I)$ módulo $B^2(K,I)$. Então existem funções lineares $f_l:K \to \F$ e $\alpha_{lh}$ tais que $\delta.\eta_l(x_i,x_j)=\sum_{k=1}^s \alpha_{lk}\theta_k(x_i,x_j)+f_l([x_i,x_j])+[f_l(x_i),x_j]-[]$
 
  
- \subsection{Ação de $\mathfrak{gl}(K)\rtimes \mathfrak{gl}(I)$ em $C^2(K,I)$}
- Se $K$ age sobre $I$ podemos definir uma ação de $\mathfrak{gl}(K)\rtimes \mathfrak{gl}(I)$ em $C^2(K,I)$. Dados $d_K+d_I \in \mathfrak{gl}(K)\rtimes \mathfrak{gl}(I)$, $\theta \in Z^2(K,I)$ e $h,k \in K$, defina a aplicação  
- $\psi_K: \mathfrak{gl}(K)\rtimes \mathfrak{gl}(I) \to  \mathfrak{gl}(C^2(K,I))$ por \begin{equation}{\label{1}}
+ \subsection{Ação de $\mathfrak{gl}(K)\oplus \mathfrak{gl}(I)$ em $C^2(K,I)$}
+ Se $K$ age sobre $I$ podemos definir uma ação de $\mathfrak{gl}(K)\oplus \mathfrak{gl}(I)$ em $C^2(K,I)$. Dados $d_K+d_I \in \mathfrak{gl}(K)\oplus \mathfrak{gl}(I)$, $\theta \in Z^2(K,I)$ e $h,k \in K$, defina a aplicação  
+ $\psi_K: \mathfrak{gl}(K)\oplus \mathfrak{gl}(I) \to  \mathfrak{gl}(C^2(K,I))$ por \begin{equation}{\label{1}}
  \psi_K(d_K+d_I)\theta(h,k)=d_I(\theta(h,k))-\theta(d_K(k),h)-\theta(k,d_K(h)).
  \end{equation}
  
- A prova que $\psi_K$ define uma representação de $\mathfrak{gl}(K)\rtimes \mathfrak{gl}(I)$ é semelhante a de $\psi_I$.
+ A prova que $\psi_K$ define uma representação de $\mathfrak{gl}(K)\oplus \mathfrak{gl}(I)$ é semelhante a de $\psi_I$.
 
 \begin{af} Os espaços $Z^2(K,I)$ e $B^2(K,I)$ são invariantes pela ação de $Comp(K,I)$ segundo a representação $\psi_K$.
 \end{af}
@@ -335,11 +374,7 @@ $=d_I(\nu[k,h])-[d_I(\nu(k)),h]-[\nu(k),d_K(h)]-[d_K(k),\nu(h)]-[k,d_I(\nu(h))]$
  \end{df}
  
  \subsection{Derivações de $L_\theta$}
- 
-
- 
- 
- 
+  
  Uma observação para coerência das notações utilizadas  para $d_I$ e $d_K$. Se $d \in L_\theta$ então $d_I$ é obtida pela restrição de $d$ à $I$. Já a função $d_K:K \to K$ é definida como a componente em $K$ de $d(k), k \in K$, que é corresponde a função $d_K$ definida em $L/I$.
 
 
@@ -358,7 +393,7 @@ $=d_I(\nu[k,h])-[d_I(\nu(k)),h]-[\nu(k),d_K(h)]-[d_K(k),\nu(h)]-[k,d_I(\nu(h))]$
  \end{flushright}
  
  
- \begin{teo} Seja $K$ uma álgebra de Lie, $I$ um $K$-módulo e $\theta \in Z^2(K,I)$. Seja $L_\theta=K \oplus I$ e considere $I$ como ideal de $L_\theta$. Assuma que $I$ é invariante por $Der(L)$. Seja $\phi:Der(L) \to Der(K) \rtimes Der(I)$ dada por $\phi(d)=d_K+d_I$. Então:
+ \begin{teo} Seja $K$ uma álgebra de Lie, $I$ um $K$-módulo e $\theta \in Z^2(K,I)$. Seja $L_\theta=K \oplus I$ e considere $I$ como ideal de $L_\theta$. Assuma que $I$ é invariante por $Der(L)$. Seja $\phi:Der(L) \to Der(K) \oplus Der(I)$ dada por $\phi(d)=d_K+d_I$. Então:
  
  \begin{enumerate}
  \item $Im(\phi)=Indu(K,I,\theta)$
@@ -418,7 +453,7 @@ d([k+a,h+b]) & = & d([k,h]_K+\theta(k,h)+[a,h]-[b,k])\\
  \cqd
  \end{flushright}
 
-modificação $L$  
+
  
 
 
